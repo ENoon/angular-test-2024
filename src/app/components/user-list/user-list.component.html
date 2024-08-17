@@ -1,0 +1,30 @@
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let user of users">
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <button (click)="toggleMore(user)">Ver mais</button>
+          <button (click)="editUser(user)">Editar</button>
+          <button (click)="removeUser(user.id)">Remover</button>
+        </td>
+      </tr>
+      <tr *ngIf="user.showMore">
+        <td colspan="5">
+          <p>Telefone: {{ user.phone }}</p>
+          <p>Endereço: {{ user.address }}</p>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>

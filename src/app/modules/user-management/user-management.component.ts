@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { ButtonComponent } from '../../components/button/button.component';
+import { UserListComponent } from '../../components/user-list/user-list.component';
 
 @Component({
   selector: 'app-user-management',
   standalone: true,
   imports: [
-    ButtonComponent
-  ],
+    UserListComponent],
   templateUrl: './user-management.component.html',
   styleUrl: './user-management.component.scss'
 })
