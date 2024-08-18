@@ -5,6 +5,6 @@ export const routes: Routes = [
     {
         path: '',
         component: UserManagementComponent,
-        title: 'User Management'
+        title: 'Gerenciamento de usuários'
       }
 ];
