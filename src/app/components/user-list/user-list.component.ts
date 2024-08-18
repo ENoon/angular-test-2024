@@ -1,24 +1,15 @@
 import { Component } from '@angular/core';
 import { DataService } from '../../services/data/data.service'; 
+import { User } from '../../models/user';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
+import { PaginationComponent } from '../pagination/pagination.component';
 
-interface User {
-  id: number;
-  username: string;
-  name: string;
-  email: string;
-  phone?: string;
-  address?: string;
-  website?: string;
-  company?: string;
-  showMore?: boolean;
-}
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [CommonModule, ButtonComponent],
+  imports: [CommonModule, ButtonComponent,PaginationComponent],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss'
 })
@@ -30,11 +21,10 @@ export class UserListComponent {
   usersPerPage: number = 5;   // Quantidade de usuários por página
 
   constructor(private userService: DataService) {
-    console.log('UserListComponent constructor');
-   }
+
+  }
 
   ngOnInit(): void {
-    console.log('UserListComponent ngOnInit');
     this.fetchUsers();
   }
 
@@ -63,23 +53,9 @@ export class UserListComponent {
     this.displayedUsers = this.users.slice(startIndex, endIndex);
   }
 
-  goToPage(page: number) {
-    this.currentPage = page;
-    this.updateDisplayedUsers();
-  }
-
-  nextPage() {
-    if (this.currentPage < this.totalPages()) {
-      this.currentPage++;
-      this.updateDisplayedUsers();
-    }
-  }
-
-  prevPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.updateDisplayedUsers();
-    }
+  handlePageChange(page: number) {
+     this.currentPage = page;
+     this.updateDisplayedUsers();
   }
 
   totalPages() {

@@ -1,0 +1,7 @@
+<div class="pagination">
+  <app-button [buttonClass]="'arrows'" (clickEvent)="prevPage()" [disabled]="currentPage === 1" [label]="'⬅'">
+  </app-button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <app-button [buttonClass]="'arrows'"  (clickEvent)="nextPage()" [disabled]="currentPage === totalPages" [label]="'⮕'">
+  </app-button>
+</div>
