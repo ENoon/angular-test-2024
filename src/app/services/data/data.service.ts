@@ -14,4 +14,5 @@ export class DataService {
   getUsers(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
+  
 }

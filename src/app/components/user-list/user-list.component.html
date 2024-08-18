@@ -1,30 +1,53 @@
-<table>
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Nome</th>
-      <th>Email</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <ng-container *ngFor="let user of users">
-      <tr>
-        <td>{{ user.id }}</td>
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td>
-          <button (click)="toggleMore(user)">Ver mais</button>
-          <button (click)="editUser(user)">Editar</button>
-          <button (click)="removeUser(user.id)">Remover</button>
-        </td>
+<div class="user-list">
+  <div class="header">
+    <h2>User Management</h2>  
+  </div>
+  <div class="second-header">
+    <app-button [buttonClass]="'addNewUser'" (clickEvent)="handleAction('Adicionar')" (clickEvent)="addUser()" [label]="'+ Add New User'"></app-button>
+  </div>
+  <table>
+    <thead>
+      <tr class="header-table">
+        <th>Id</th>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th></th>
       </tr>
-      <tr *ngIf="user.showMore">
-        <td colspan="5">
-          <p>Telefone: {{ user.phone }}</p>
-          <p>Endereço: {{ user.address }}</p>
-        </td>
-      </tr>
-    </ng-container>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let user of displayedUsers">
+        <tr class="list">
+          <td>{{ user.id }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td class="actions-cell">
+            <app-button [buttonClass]="'showMore-button'" (clickEvent)="toggleMore(user)" [label]="'More'"></app-button>
+            <app-button (clickEvent)="handleAction('Editar')" (clickEvent)="editUser(user)" [label]="'✏️'"></app-button>
+            <app-button (clickEvent)="handleAction('Deletar')" (clickEvent)= "removeUser(user.id)" [label]="'🗑️'"></app-button>
+          </td>
+        </tr>
+        <tr *ngIf="user.showMore">
+          <td colspan="5">
+            <p class="user-details">Phone: {{ user.phone }}</p>
+            <p class="user-details">Address: {{ user.address }}</p>
+            <p class="user-details">Website: {{ user.website }}</p>
+            <p class="user-details">Company: {{ user.company}}</p>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <app-button [buttonClass]="'arrows'" (clickEvent)="prevPage()" [disabled]="currentPage === 1" [label]="'⬅'"></app-button>
+    <span>Page {{ currentPage }} of {{ totalPages() }}</span>
+    <app-button [buttonClass]="'arrows'" (clickEvent)="nextPage()" [disabled]="currentPage === totalPages()" [label]="'⮕'"></app-button>
+  </div>
+
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  </head>
+  
+</div>
