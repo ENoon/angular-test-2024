@@ -14,5 +14,8 @@ export class DataService {
   getUsers(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
-  
+
+  deleteUser(userId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${userId}`);
+  }
 }

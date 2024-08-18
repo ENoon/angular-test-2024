@@ -11,18 +11,16 @@ import { PaginationComponent } from '../pagination/pagination.component';
   standalone: true,
   imports: [CommonModule, ButtonComponent,PaginationComponent],
   templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.scss'
+  styleUrl: './user-list.component.scss',
 })
 export class UserListComponent {
 
   users: User[] = [];
   displayedUsers: User[] = []; 
   currentPage: number = 1;  // Usuários para exibir na página atual
-  usersPerPage: number = 5;   // Quantidade de usuários por página
-
-  constructor(private userService: DataService) {
-
-  }
+  usersPerPage: number = 5;   // Quantidade de usuários por página  
+    
+  constructor(private userService: DataService) {}
 
   ngOnInit(): void {
     this.fetchUsers();
@@ -31,7 +29,6 @@ export class UserListComponent {
   fetchUsers() {
     this.userService.getUsers().subscribe((data: any[]) => {
       // Mapeando os dados
-      console.log('Dados recebidos:', data);
       this.users = data.map(user => ({
         id: user.id,
         username: user.username,
@@ -69,11 +66,22 @@ export class UserListComponent {
 
   editUser(user: User) {
     // Lógica para editar o usuário
-
   }
 
   removeUser(userId: number) {
-    // Lógica para remover o usuário
+    if (window.confirm('Você tem certeza que quer deletar esse usuário?')) {
+      this.userService.deleteUser(userId).subscribe({
+        next: () => {
+          alert('Usuário deletado com sucesso');
+          this.users = this.users.filter(user => user.id !== userId);
+          this.updateDisplayedUsers(); // Atualizar a exibição
+        },
+        error: (err) => {
+          alert('Um erro ocorreu ao deletar esse usuário');
+          console.error('Delete user error:', err);
+        }
+      });
+    }
   }
 
   toggleMore(user: User) {

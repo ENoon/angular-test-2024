@@ -1,16 +1,16 @@
 <div class="user-list">
   <div class="header">
-    <h2>User Management</h2>  
+    <h2>Gerenciamento de usuários</h2>  
   </div>
   <div class="second-header">
-    <app-button [buttonClass]="'addNewUser'" (clickEvent)="handleAction('Adicionar')" (clickEvent)="addUser()" [label]="'+ Add New User'"></app-button>
+    <app-button [buttonClass]="'addNewUser'" (clickEvent)="handleAction('Adicionar')" (clickEvent)="addUser()" [label]="'+ Add Novo Usuário'"></app-button>
   </div>
   <table>
     <thead>
       <tr class="header-table">
         <th>Id</th>
-        <th>Username</th>
-        <th>Name</th>
+        <th>Nome de usuário</th>
+        <th>Nome</th>
         <th>Email</th>
         <th></th>
       </tr>
@@ -23,17 +23,17 @@
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td class="actions-cell">
-            <app-button [buttonClass]="'showMore-button'" (clickEvent)="toggleMore(user)" [label]="'More'"></app-button>
+            <app-button [buttonClass]="'showMore-button'" (clickEvent)="toggleMore(user)" [label]="'Ver mais'"></app-button>
             <app-button (clickEvent)="handleAction('Editar')" (clickEvent)="editUser(user)" [label]="'✏️'"></app-button>
             <app-button (clickEvent)="handleAction('Deletar')" (clickEvent)= "removeUser(user.id)" [label]="'🗑️'"></app-button>
           </td>
         </tr>
         <tr *ngIf="user.showMore">
           <td colspan="5">
-            <p class="user-details">Phone: {{ user.phone }}</p>
-            <p class="user-details">Address: {{ user.address }}</p>
-            <p class="user-details">Website: {{ user.website }}</p>
-            <p class="user-details">Company: {{ user.company}}</p>
+            <p class="user-details">Telefone: {{ user.phone }}</p>
+            <p class="user-details">Endereço: {{ user.address }}</p>
+            <p class="user-details">Site: {{ user.website }}</p>
+            <p class="user-details">Companhia: {{ user.company}}</p>
           </td>
         </tr>
       </ng-container>

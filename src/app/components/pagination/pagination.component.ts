@@ -13,10 +13,6 @@ export class PaginationComponent {
   @Input() totalPages!: number;
   @Output() pageChange = new EventEmitter<number>();
 
-  goToPage(page: number) {
-    this.pageChange.emit(page);
-  }
-
   nextPage() {
     if (this.currentPage < this.totalPages) {
       this.pageChange.emit(this.currentPage + 1);
